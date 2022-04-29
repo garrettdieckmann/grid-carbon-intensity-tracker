@@ -1,7 +1,7 @@
 /*
     Create the scrape/raw data table
 */
-CREATE TABLE `WattTime.scrapedData`
+CREATE TABLE `carbon_intensity.raw_data`
 (
   ba STRING NOT NULL OPTIONS(description="Balancing Authority"),
   point_time TIMESTAMP NOT NULL OPTIONS(description="Point in time of percentage calculation"),
