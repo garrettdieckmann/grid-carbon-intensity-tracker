@@ -80,7 +80,7 @@
             "orderByCol": "1",
             "orderBySort": "1",
             "rawQuery": true,
-            "rawSql": "SELECT\n    forecast_timestamp as value\nFROM\n    ML.FORECAST(MODEL WattTime.predictions, STRUCT(864 AS horizon, 0.95 AS confidence_level))\nWHERE\n  $__timeFilter(forecast_timestamp)\n  and ba = \"$BA\"\nORDER BY forecast_value asc limit 1\n",
+            "rawSql": "SELECT\n    forecast_timestamp as value\nFROM\n    ML.FORECAST(MODEL carbon_intensity.forecasts, STRUCT(864 AS horizon, 0.95 AS confidence_level))\nWHERE\n  $__timeFilter(forecast_timestamp)\n  and ba = \"$BA\"\nORDER BY forecast_value asc limit 1\n",
             "refId": "A",
             "select": [
               [
@@ -203,7 +203,7 @@
             "orderByCol": "1",
             "orderBySort": "1",
             "rawQuery": true,
-            "rawSql": "SELECT\n  point_time,\n  percent\nFROM\n  WattTime.scrapedData\nWHERE\n  $__timeFilter(point_time)\n  and ba = \"$BA\"\nORDER BY point_time",
+            "rawSql": "SELECT\n  point_time,\n  percent\nFROM\n  carbon_intensity.raw_data\nWHERE\n  $__timeFilter(point_time)\n  and ba = \"$BA\"\nORDER BY point_time",
             "refId": "A",
             "select": [
               [
@@ -238,7 +238,7 @@
             "orderByCol": "1",
             "orderBySort": "1",
             "rawQuery": true,
-            "rawSql": " SELECT\n    forecast_timestamp,\n    prediction_interval_lower_bound,\n    prediction_interval_upper_bound,\n    forecast_value\nFROM\n    ML.FORECAST(MODEL WattTime.predictions, STRUCT(864 AS horizon, 0.95 AS confidence_level))\nWHERE\n  $__timeFilter(forecast_timestamp)\n  and ba = \"$BA\"",
+            "rawSql": " SELECT\n    forecast_timestamp,\n    prediction_interval_lower_bound,\n    prediction_interval_upper_bound,\n    forecast_value\nFROM\n    ML.FORECAST(MODEL carbon_intensity.forecasts, STRUCT(864 AS horizon, 0.95 AS confidence_level))\nWHERE\n  $__timeFilter(forecast_timestamp)\n  and ba = \"$BA\"",
             "refId": "B",
             "select": [
               [
@@ -310,7 +310,7 @@
             "text": "SCL",
             "value": "SCL"
           },
-          "definition": "select distinct ba from `WattTime.scrapedData`",
+          "definition": "select distinct ba from `carbon_intensity.raw_data`",
           "description": "Balancing Authority",
           "hide": 0,
           "includeAll": false,
@@ -318,7 +318,7 @@
           "multi": false,
           "name": "BA",
           "options": [],
-          "query": "select distinct ba from `WattTime.scrapedData`",
+          "query": "select distinct ba from `carbon_intensity.raw_data`",
           "refresh": 1,
           "regex": "",
           "skipUrlSync": false,
