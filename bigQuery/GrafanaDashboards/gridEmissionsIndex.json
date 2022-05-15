@@ -1,340 +1,629 @@
 {
-    "annotations": {
-      "list": [
-        {
-          "builtIn": 1,
-          "datasource": "-- Grafana --",
-          "enable": true,
-          "hide": true,
-          "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "target": {
-            "limit": 100,
-            "matchAny": false,
-            "tags": [],
-            "type": "dashboard"
-          },
-          "type": "dashboard"
-        }
-      ]
-    },
-    "editable": true,
-    "fiscalYearStartMonth": 0,
-    "graphTooltip": 0,
-    "id": 1,
-    "iteration": 1650763864624,
-    "links": [],
-    "liveNow": false,
-    "panels": [
+  "annotations": {
+    "list": [
       {
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "thresholds"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "dateTimeAsUS"
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "iteration": 1652652602520,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "title": "With Percentages",
+      "type": "row"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
           },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 0
-        },
-        "id": 4,
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area",
-          "justifyMode": "center",
-          "orientation": "vertical",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "/.*/",
-            "values": false
-          },
-          "textMode": "value"
-        },
-        "pluginVersion": "8.4.4",
-        "targets": [
-          {
-            "datasource": {
-              "type": "doitintl-bigquery-datasource",
-              "uid": "JRKdDTQ7z"
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "format": "table",
-            "group": [],
-            "metricColumn": "none",
-            "orderByCol": "1",
-            "orderBySort": "1",
-            "rawQuery": true,
-            "rawSql": "SELECT\n    forecast_timestamp as value\nFROM\n    ML.FORECAST(MODEL carbon_intensity.forecasts, STRUCT(864 AS horizon, 0.95 AS confidence_level))\nWHERE\n  $__timeFilter(forecast_timestamp)\n  and ba = \"$BA\"\nORDER BY forecast_value asc limit 1\n",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "-- value --"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "timeColumn": "-- time --",
-            "timeColumnType": "TIMESTAMP",
-            "where": [
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
               {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "prediction_interval_upper_bound"
+            },
+            "properties": [
+              {
+                "id": "custom.fillBelowTo",
+                "value": "prediction_interval_lower_bound"
+              }
+            ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Value"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
               }
             ]
           }
-        ],
-        "title": "Panel Title",
-        "type": "stat"
+        ]
       },
-      {
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "barAlignment": 0,
-              "drawStyle": "line",
-              "fillOpacity": 0,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineInterpolation": "linear",
-              "lineWidth": 1,
-              "pointSize": 5,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "showPoints": "auto",
-              "spanNulls": false,
-              "stacking": {
-                "group": "A",
-                "mode": "none"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            },
-            "unit": "none"
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "convertToUTC": true,
+          "datasource": {
+            "type": "doitintl-bigquery-datasource",
+            "uid": "JRKdDTQ7z"
           },
-          "overrides": [
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "orderByCol": "1",
+          "orderBySort": "1",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  point_time,\n  percent\nFROM\n  carbon_intensity.raw_data\nWHERE\n  $__timeFilter(point_time)\n  and ba = \"$BA\"",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "-- value --"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "-- time --",
+          "timeColumnType": "TIMESTAMP",
+          "where": [
             {
-              "matcher": {
-                "id": "byName",
-                "options": "prediction_interval_upper_bound"
-              },
-              "properties": [
-                {
-                  "id": "custom.fillBelowTo",
-                  "value": "prediction_interval_lower_bound"
-                }
-              ]
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
             }
           ]
         },
-        "gridPos": {
-          "h": 10,
-          "w": 24,
-          "x": 0,
-          "y": 8
-        },
-        "id": 2,
-        "options": {
-          "legend": {
-            "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom"
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "targets": [
-          {
-            "convertToUTC": true,
-            "datasource": {
-              "type": "doitintl-bigquery-datasource",
-              "uid": "JRKdDTQ7z"
-            },
-            "format": "time_series",
-            "group": [],
-            "hide": false,
-            "metricColumn": "none",
-            "orderByCol": "1",
-            "orderBySort": "1",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  point_time,\n  percent\nFROM\n  carbon_intensity.raw_data\nWHERE\n  $__timeFilter(point_time)\n  and ba = \"$BA\"\nORDER BY point_time",
-            "refId": "A",
-            "select": [
-              [
-                {
-                  "params": [
-                    "-- value --"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "timeColumn": "-- time --",
-            "timeColumnType": "TIMESTAMP",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          },
-          {
-            "convertToUTC": true,
-            "datasource": {
-              "type": "doitintl-bigquery-datasource",
-              "uid": "JRKdDTQ7z"
-            },
-            "format": "time_series",
-            "group": [],
-            "hide": false,
-            "metricColumn": "none",
-            "orderByCol": "1",
-            "orderBySort": "1",
-            "rawQuery": true,
-            "rawSql": " SELECT\n    forecast_timestamp,\n    prediction_interval_lower_bound,\n    prediction_interval_upper_bound,\n    forecast_value\nFROM\n    ML.FORECAST(MODEL carbon_intensity.forecasts, STRUCT(864 AS horizon, 0.95 AS confidence_level))\nWHERE\n  $__timeFilter(forecast_timestamp)\n  and ba = \"$BA\"",
-            "refId": "B",
-            "select": [
-              [
-                {
-                  "params": [
-                    "-- value --"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "timeColumn": "-- time --",
-            "timeColumnType": "TIMESTAMP",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          },
-          {
-            "datasource": {
-              "type": "doitintl-bigquery-datasource",
-              "uid": "JRKdDTQ7z"
-            },
-            "format": "time_series",
-            "group": [],
-            "hide": false,
-            "metricColumn": "none",
-            "orderByCol": "1",
-            "orderBySort": "1",
-            "rawQuery": false,
-            "rawSql": "SELECT\n  time_column,\n  value1\nFROM\n  metric_table\nWHERE\n  $__timeFilter(time_column)\n",
-            "refId": "C",
-            "select": [
-              [
-                {
-                  "params": [
-                    "-- value --"
-                  ],
-                  "type": "column"
-                }
-              ]
-            ],
-            "timeColumn": "-- time --",
-            "timeColumnType": "TIMESTAMP",
-            "where": [
-              {
-                "name": "$__timeFilter",
-                "params": [],
-                "type": "macro"
-              }
-            ]
-          }
-        ],
-        "title": "Emission percentage for grid",
-        "type": "timeseries"
-      }
-    ],
-    "schemaVersion": 35,
-    "style": "dark",
-    "tags": [],
-    "templating": {
-      "list": [
         {
-          "current": {
-            "selected": true,
-            "text": "SCL",
-            "value": "SCL"
+          "convertToUTC": true,
+          "datasource": {
+            "type": "doitintl-bigquery-datasource",
+            "uid": "JRKdDTQ7z"
           },
-          "definition": "select distinct ba from `carbon_intensity.raw_data`",
-          "description": "Balancing Authority",
-          "hide": 0,
-          "includeAll": false,
-          "label": "",
-          "multi": false,
-          "name": "BA",
-          "options": [],
-          "query": "select distinct ba from `carbon_intensity.raw_data`",
-          "refresh": 1,
-          "regex": "",
-          "skipUrlSync": false,
-          "sort": 0,
-          "type": "query"
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "orderByCol": "1",
+          "orderBySort": "1",
+          "rawQuery": true,
+          "rawSql": " SELECT\n    forecast_timestamp,\n    prediction_interval_lower_bound,\n    prediction_interval_upper_bound,\n    forecast_value\nFROM\n    ML.FORECAST(MODEL carbon_intensity.relative_forecasts, STRUCT(864 AS horizon, 0.95 AS confidence_level))\nWHERE\n  $__timeFilter(forecast_timestamp)\n  and ba = \"$BA\"",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "-- value --"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "-- time --",
+          "timeColumnType": "TIMESTAMP",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "doitintl-bigquery-datasource",
+            "uid": "OHHnkmXnk"
+          },
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "orderByCol": "1",
+          "orderBySort": "1",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  time_column,\n  value1\nFROM\n  metric_table\nWHERE\n  $__timeFilter(time_column)\n",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "-- value --"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "-- time --",
+          "timeColumnType": "TIMESTAMP",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
         }
-      ]
+      ],
+      "title": "Percentages per grid (with forecasts)",
+      "type": "timeseries"
     },
-    "time": {
-      "from": "now-3h",
-      "to": "now+3h"
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 10,
+      "panels": [],
+      "title": "With MOER",
+      "type": "row"
     },
-    "timepicker": {},
-    "timezone": "",
-    "title": "Grid Emissions Index",
-    "uid": "S4Y_Dow7k",
-    "version": 11,
-    "weekStart": ""
-  }
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "prediction_interval_upper_bound"
+            },
+            "properties": [
+              {
+                "id": "custom.fillBelowTo",
+                "value": "prediction_interval_lower_bound"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "doitintl-bigquery-datasource",
+            "uid": "OHHnkmXnk"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "orderByCol": "1",
+          "orderBySort": "1",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  point_time,\n  moer\nFROM\n  carbon_intensity.raw_data\nWHERE\n  $__timeFilter(point_time)\n  and ba = \"$BA\"\nORDER BY point_time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "-- value --"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "-- time --",
+          "timeColumnType": "TIMESTAMP",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "doitintl-bigquery-datasource",
+            "uid": "OHHnkmXnk"
+          },
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "orderByCol": "1",
+          "orderBySort": "1",
+          "rawQuery": true,
+          "rawSql": " SELECT\n    forecast_timestamp,\n    prediction_interval_lower_bound,\n    prediction_interval_upper_bound,\n    forecast_value\nFROM\n    ML.FORECAST(MODEL carbon_intensity.moer_forecasts, STRUCT(864 AS horizon, 0.95 AS confidence_level))\nWHERE\n  $__timeFilter(forecast_timestamp)\n  and ba = \"$BA\"",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "-- value --"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "-- time --",
+          "timeColumnType": "TIMESTAMP",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "datasource": {
+            "type": "doitintl-bigquery-datasource",
+            "uid": "OHHnkmXnk"
+          },
+          "format": "time_series",
+          "group": [],
+          "hide": false,
+          "metricColumn": "none",
+          "orderByCol": "1",
+          "orderBySort": "1",
+          "rawQuery": false,
+          "rawSql": "SELECT\n  time_column,\n  value1\nFROM\n  metric_table\nWHERE\n  $__timeFilter(time_column)\n",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "-- value --"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "-- time --",
+          "timeColumnType": "TIMESTAMP",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "MOER per grid (with forecasts)",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "percent"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "left"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "moer"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "doitintl-bigquery-datasource",
+            "uid": "OHHnkmXnk"
+          },
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "orderByCol": "1",
+          "orderBySort": "1",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  point_time,\n  moer,\n  percent\nFROM\n  carbon_intensity.raw_data\nWHERE\n  $__timeFilter(point_time)\n  and ba = \"$BA\"\nORDER BY point_time",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "-- value --"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "-- time --",
+          "timeColumnType": "TIMESTAMP",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "title": "Percent vs MOER",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 35,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "CAISO_NORTH",
+          "value": "CAISO_NORTH"
+        },
+        "definition": "select distinct ba from `carbon_intensity.raw_data`",
+        "description": "Balancing Authority",
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "BA",
+        "options": [],
+        "query": "select distinct ba from `carbon_intensity.raw_data`",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now+3h"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Grid Emissions Index",
+  "uid": "S4Y_Dow7k",
+  "version": 4,
+  "weekStart": ""
+}

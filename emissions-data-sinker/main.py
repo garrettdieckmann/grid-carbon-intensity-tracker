@@ -26,9 +26,11 @@ class BigQuerySink:
             print(f"Unable to insert rows: {error}")
 
     def raw_to_bq(self, data):
-        row_to_insert = [{
+        to_insert = {
             u"ba": data['ba'],
             u"point_time": data['point_time'],
             u"percent": data['percent']
-        }]
-        return row_to_insert
+        }
+        if 'moer' in data:
+            to_insert[u"moer"] = data['moer']
+        return [to_insert]

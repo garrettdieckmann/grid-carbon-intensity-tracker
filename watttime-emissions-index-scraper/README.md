@@ -12,7 +12,8 @@ Data in the intermediary Pub/Sub topic is retrieved by the [Emissions Data Sinke
     * Runs every 5 minutes
     * Publishes to the Pub/Sub topic created above
     * Has a message body with an array of Balancing Authority codes to collect carbon intensity data on
-        * Example: ["SCL","NYISO_NYC","CAISO_SANDIEGO"] (1 message will be published for *each* BA - in this example, 3 messages will be published)
+        * Example: ["SCL","NYISO_NYC","CAISO_SANDIEGO","CAISO_NORTH"] (1 message will be published for *each* BA - in this example, 4 messages will be published)
+            * Note: All region data is available for "CAISO_NORTH" even without a WattTime API subscription
     * Has a message attribute with a `replyTo` key, which tells downstream systems where to publish the collected data
         * Format: `projects/<project-name>/topics/<topic-name>`
 * Create 2 secrets in Google Cloud Secret Manager:
